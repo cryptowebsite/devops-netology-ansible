@@ -153,7 +153,7 @@ ok: [ubuntu] => {
 
 # 12. Заполните `README.md` ответами на вопросы. Сделайте `git push` в ветку `master`. В ответе отправьте ссылку на ваш открытый репозиторий с изменённым playbook и заполненным README.md.
 ## Самоконтроль выполненения задания
-https://github.com/cryptowebsite/devops-netology-ansible/README.md
+https://github.com/cryptowebsite/devops-netology-ansible/blob/master/README.md
 
 ____________________________________________________________________________________________
 
