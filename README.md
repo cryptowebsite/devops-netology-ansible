@@ -1,42 +1,28 @@
-# Самоконтроль выполненения задания
+# Lesson 8.2
+Данный [playbook](https://github.com/cryptowebsite/devops-netology-ansible/blob/master/site.yml) служит для создания стека ELK и имеет `4 play`.
+## 1. `Install Java`. Имеет `5 task` с тегами `java`.
+### 1.1 `Set facts for Java 11 vars`
+Задаём значение переменной `java_home`
+### 1.2 `Upload .tar.gz file containing binaries from local storage`
+Копируем архив с дистрибутивом JDK с `control node` на `managed node`
+### 1.3 `Ensure installation dir exists`
+Создаём директорию для дистрибутива
+### 1.4 `Extract java in the installation directory`
+Распаковываем архив с дистрибутивом в подготовленную директорию
+### 1.5 `Export environment variables`
+С помощью шаблонизатора создаем скрипт для настройки `environment`
 
-1. Где расположен файл с `some_fact` из второго пункта задания?
-* Определение переменной `some_fact` находится в файлах по следующему пути `group_vars/<name_of_host_group>/examp.yaml`. 
-* В случае отсутствия директории с именем группы хостов будет использоваться следующий путь `group_vars/all/examp.yaml`.
+## 2. `Install Elasticsearch`. Имеет `4 task` с тегами `elasticsearch`.
+### 2.1 `Upload tar.gz Elasticsearch from remote URL`
+Скачиваем дистрибутив с официального репозитория
+### 2.2 `Create directrory for Elasticsearch`
+Создаём директорию для дистрибутива
+### 2.3 `Extract Elasticsearch in the installation directory`
+Распаковываем архив с дистрибутивом в подготовленную директорию
+### 2.4 `Set environment Elastic`
+С помощью шаблонизатора создаем скрипт для настройки `environment`
 
-2. Какая команда нужна для запуска вашего `playbook` на окружении `test.yml`?
-```shell
-ansible-playbook -i inventory/test.yml site.yml
-```
+## 3-4. `Install Kibana` и `Install Logstash` 
+Имеют одинаковые по логике `4 tasks`, с тегами `kibana` и `logstash` соответственною, как в случае с `Install Elasticsearch`. За исключением того, что в `Install Elasticsearch` добавлен ещё один `task` `Set config Logstash`, в котором мы с помощью шаблонизатора и переменной с именем хоста `elastic_host` создали сонфиг `logstash.conf` и переместили его на сервер.
 
-3. Какой командой можно зашифровать файл?
-```shell
-ansible-vault encrypt <some_file>
-```
 
-4. Какой командой можно расшифровать файл?
-```shell
-ansible-vault decrypt <some_file>
-```
-
-5. Можно ли посмотреть содержимое зашифрованного файла без команды расшифровки файла? Если можно, то как?
-Да можно.
-```shell
-ansible-vault view <some_file>
-```
-
-6. Как выглядит команда запуска `playbook`, если переменные зашифрованы?
-```shell
-ansible-playbook -i inventory/test.yml --ask-vault-password site.yml
-```
-
-7. Как называется модуль подключения к host на windows?
-`winrm`
-
-8. Приведите полный текст команды для поиска информации в документации ansible для модуля подключений ssh
-```shell
-ansible-doc -t connection -l | grep ssh
-```
-
-9. Какой параметр из модуля подключения `ssh` необходим для того, чтобы определить пользователя, под которым необходимо совершать подключение?
-`remote_user`
