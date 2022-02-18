@@ -1,5 +1,9 @@
 variable "centos-7-base" {
-  default = ""
+  default = "fd8b2srp307fsql2fht4"
+}
+
+variable "debian-10-base" {
+  default = "fd8ci1q50a9dc7822tel"
 }
 
 variable "zone" {
@@ -23,13 +27,13 @@ variable "memory" {
 variable "cloud_id" {
   type        = string
   description = "Cloud id for deployment"
-  default     = ""
+  default     = "b1gsvg57220fl1f4agtc"
 }
 
 variable "folder_id" {
   type        = string
   description = "Folder id for deployment"
-  default     = ""
+  default     = "b1g8n8d6tmplil5u4286"
 }
 
 variable "token" {

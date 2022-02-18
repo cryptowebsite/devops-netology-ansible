@@ -10,7 +10,7 @@ services:
       main:
         ipv4_address: "10.10.10.2"
   kibana:
-    container_name: kibana
+    container_name: kibana-role
     image: centos:centos7
     restart: unless-stopped
     command: "tail -f /dev/null"

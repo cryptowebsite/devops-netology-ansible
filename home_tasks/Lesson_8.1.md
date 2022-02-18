@@ -1,6 +1,6 @@
 # 1. Попробуйте запустить playbook на окружении из `test.yml`, зафиксируйте какое значение имеет факт `some_fact` для указанного хоста при выполнении playbook'a.
 ````shell
-ansible-playbook -i inventory/test.yml site.yml
+ansible-playbook -i inventory/test.yml site.yml.OLD
 
 # ....
 ok: [localhost] => {
@@ -27,7 +27,7 @@ docker run --name centos7 -d centos:centos7 tail -f /dev/null
 
 # 4. Проведите запуск playbook на окружении из `prod.yml`. Зафиксируйте полученные значения `some_fact` для каждого из `managed host`.
 ```shell
-ansible-playbook -i inventory/prod.yml site.yml
+ansible-playbook -i inventory/prod.yml site.yml.OLD
 
 # ...
 ok: [centos7] => {
@@ -54,7 +54,7 @@ sed -i 's/some_fact: "el"/some_fact: "el default fact"/g' group_vars/el/examp.ym
 
 # 6. Повторите запуск playbook на окружении `prod.yml`. Убедитесь, что выдаются корректные значения для всех хостов.
 ```shell
-ansible-playbook -i inventory/prod.yml site.yml
+ansible-playbook -i inventory/prod.yml site.yml.OLD
 
 # ...
 ok: [centos7] => {
@@ -81,7 +81,7 @@ ansible-vault encrypt group_vars/el/examp.yml
 
 # 8. Запустите playbook на окружении `prod.yml`. При запуске `ansible` должен запросить у вас пароль. Убедитесь в работоспособности.
 ```shell
-ansible-playbook -i inventory/prod.yml --ask-vault-password site.yml
+ansible-playbook -i inventory/prod.yml --ask-vault-password site.yml.OLD
 
 Vault password: 
 #...
@@ -125,7 +125,7 @@ ansible-doc -t connection -l | grep 'connect via ssh'
 
 # 11. Запустите playbook на окружении `prod.yml`. При запуске `ansible` должен запросить у вас пароль. Убедитесь что факты `some_fact` для каждого из хостов определены из верных `group_vars`.
 ```shell
-ansible-playbook -i inventory/prod.yml --ask-vault-password site.yml
+ansible-playbook -i inventory/prod.yml --ask-vault-password site.yml.OLD
 
 Vault password: 
 # ...
@@ -170,7 +170,7 @@ ansible-vault encrypt_string
 
 # 3. Запустите `playbook`, убедитесь, что для нужных хостов применился новый `fact`.
 ```shell
-ansible-playbook -i inventory/prod.yml --ask-vault-password site.yml
+ansible-playbook -i inventory/prod.yml --ask-vault-password site.yml.OLD
 
 Vault password: 
 # ...
@@ -227,7 +227,7 @@ do
   docker run --name "$container" -d "${containers[$container]}" tail -f /dev/null
 done
 
-ansible-playbook -i inventory/prod.yml --ask-vault-password site.yml
+ansible-playbook -i inventory/prod.yml --ask-vault-password site.yml.OLD
 
 for container in "${!containers[@]}";
 do

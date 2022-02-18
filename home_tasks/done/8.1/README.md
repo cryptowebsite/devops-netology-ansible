@@ -6,7 +6,7 @@
 
 2. Какая команда нужна для запуска вашего `playbook` на окружении `test.yml`?
 ```shell
-ansible-playbook -i inventory/test.yml site.yml
+ansible-playbook -i inventory/test.yml site.yml.OLD
 ```
 
 3. Какой командой можно зашифровать файл?
@@ -27,7 +27,7 @@ ansible-vault view <some_file>
 
 6. Как выглядит команда запуска `playbook`, если переменные зашифрованы?
 ```shell
-ansible-playbook -i inventory/test.yml --ask-vault-password site.yml
+ansible-playbook -i inventory/test.yml --ask-vault-password site.yml.OLD
 ```
 
 7. Как называется модуль подключения к host на windows?
