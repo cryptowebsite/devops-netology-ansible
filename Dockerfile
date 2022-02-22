@@ -1,8 +1,29 @@
-FROM registry.redhat.io/rhel8/podman:latest
-ENV MOLECULE_NO_LOG false
+FROM debian:latest
 
-RUN yum reinstall glibc-common -y
-RUN yum update -y && yum install tar gcc make python3-pip zlib-devel openssl-devel yum-utils libffi-devel -y
+ENV MOLECULE_NO_LOG false
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+
+RUN apt-get -y update
+RUN apt-get -y install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release \
+    tar \
+    gcc \
+    make  \
+    python3-pip \
+    apt-utils \
+    libbz2-dev \
+    libssl-dev
+
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+RUN echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+RUN apt-get -y update
+RUN apt-get -y install docker-ce docker-ce-cli containerd.io
 
 ADD https://www.python.org/ftp/python/3.6.13/Python-3.6.13.tgz Python-3.6.13.tgz
 RUN tar xf Python-3.6.13.tgz && cd Python-3.6.13/ && ./configure && make && make altinstall
